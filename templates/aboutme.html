@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.css"/>
+
+    <title>Analyst</title>
+</head>
+<body>
+    
+  <input type="checkbox" id="nav-toggle">
+  <div class="sidebar">
+      <div class="sidebar-brand">
+        <h1> 
+          <span class="fab fa-asymmetrik fa-spin"> </span>
+          <span>Analyst</span>
+        </h1>
+        <span class="fas fa-bars"></span>
+      </div>
+      
+      <div class="sidebar-menu">
+        <ul>
+          <li>
+            <a href="{{ url_for('dashboard')}}">
+              <span class="fas fa-tachometer-alt"></span>
+              <span>Dashboard</span>
+            </a>
+          </li>
+
+          <li>
+            <input type="checkbox" name="" id="data">
+            <label for="data" >
+              <a role="button">
+                <span class="fas fa-paper-plane" ></span>
+                <span>Data Processing</span>
+              </a>
+            </label>
+            <ul>
+              <li><a href="{{ url_for('crawling')}}">Crawling Data</a></li>
+              <li><a href="{{ url_for('preprocessing_upload')}}">Pre-processing Data</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="{{ url_for('labelling_upload')}}">
+              <span class="fas fa-snowflake"></span>
+              <span>Labelling</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{url_for('classification_upload')}}">
+              <span class="fas fa-bezier-curve"></span>
+              <span>Classification</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{url_for('aboutme')}}" class="active">
+              <span class="fas fa-user-circle"></span>
+              <span>About me</span>
+            </a>
+          </li>
+        </ul>
+
+      </div>
+  </div>    
+
+  <div class="main-content">
+    <header>
+      <h2>
+        <label for="nav-toggle">
+          <span class="fas fa-bars"></span>
+        </label>
+        About Me
+      </h2>
+
+      <div class="user-wrapper">
+       <img src="static/logo-umk.png" width="40px" height="40px" alt="profile-img">
+       <div class="">
+          <h4>Aninda Syifa Rosita Uyun</h4>
+          <small>Data Analyst</small>
+       </div>
+      </div>
+    </header>
+
+    <main>
+
+        <center>
+            <div>
+              <h2>
+                SENTIMENT ANALYST TENTANG "MENTAL HEALTH ISSUE" MENGGUNAKAN METODE NAIVE BAYES CLASSIFIER
+              </h2>
+              <br>
+              <hr>
+              <h3>
+                Aninda Syifa Rosita Uyun
+                <br>
+                201851236
+              </h3>
+              <br>
+              <img src="https://kemahasiswaan.umk.ac.id/wp-content/uploads/2020/02/cropped-logo-umk-warna-1.png" width="150px" height="150px" alt="profile-img">
+              <br>
+              <h5>
+                Dosen Pembimbing: <br>
+                Ahmad Jazuli, S. Kom., M. Kom <br>
+                Tutik Khotimah, S. Kom., M. Kom
+              </h5>
+              <hr>
+              <br>
+              <h3>
+                PROGRAM STUDI TEKNIK INFORMATIKA
+                <br>
+                FAKULTAS TEKNIK
+                <br>
+                UNIVERSITAS MURIA KUDUS
+              </h3>
+            </div>
+          </center>
+        
+    </main>
+  </div>
+</body>
+
+<script type="text/javascript" src="assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="assets/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.js"></script>
+<script>
+  $(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+</script>
+
+<script>
+  var subMenuCheck = document.querySelectorAll('.sidebar-menu input[type=checkbox]');
+  var navToggle = document.getElementById('nav-toggle')
+  var menuButton = document.querySelector('.sidebar-brand .fas')
+  menuButton.addEventListener('click', function(){
+    navToggle.checked = true;
+    subMenuCheck.forEach(sub => {
+      sub.checked = false;
+    })
+  })
+  var navToggle = document.getElementById('nav-toggle');
+  var subMenu = document.querySelectorAll('.sidebar-menu input[type=checkbox] + label');
+  subMenu.forEach(sub => {
+      sub.addEventListener('click', () => {
+        if (window.innerWidth < 768){
+          navToggle.checked = true; 
+        } else {
+          navToggle.checked = false; 
+        }
+        
+      })
+  })
+</script>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.css"/>
+
+    <title>Analyst</title>
+    <style>
+      .table-div::-webkit-scrollbar {
+        width: 0 !important
+        
+      }
+      .table-div { overflow: -moz-scrollbars-none; }
+      .table-div { -ms-overflow-style: none; }
+    </style>
+</head>
+<body>
+    
+  <input type="checkbox" id="nav-toggle">
+  <div class="sidebar">
+      <div class="sidebar-brand">
+        <h1> 
+          <span class="fab fa-asymmetrik fa-spin"> </span>
+          <span>Analyst</span>
+        </h1>
+        <span class="fas fa-bars"></span>
+      </div>
+      
+      <div class="sidebar-menu">
+        <ul>
+          <li>
+            <a href="{{ url_for('dashboard')}}">
+              <span class="fas fa-tachometer-alt"></span>
+              <span>Dashboard</span>
+            </a>
+          </li>
+
+          <li>
+            <input type="checkbox" name="" id="data">
+            <label for="data" >
+              <a role="button" class="active">
+                <span class="fas fa-paper-plane" ></span>
+                <span>Data Processing</span>
+              </a>
+            </label>
+            <ul>
+              <li><a href="{{ url_for('crawling')}}">Crawling Data</a></li>
+              <li><a href="{{ url_for('preprocessing_upload')}}">Pre-processing Data</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="{{ url_for('labelling_upload')}}">
+              <span class="fas fa-snowflake"></span>
+              <span>Labelling</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{url_for('classification_upload')}}">
+              <span class="fas fa-bezier-curve"></span>
+              <span>Classification</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{url_for('aboutme')}}">
+              <span class="fas fa-user-circle"></span>
+              <span>About me</span>
+            </a>
+          </li>
+        </ul>
+
+      </div>
+  </div>    
+
+  <div class="main-content">
+    <header>
+      <h2>
+        <label for="nav-toggle">
+          <span class="fas fa-bars"></span>
+        </label>
+        Preprocessing Data
+      </h2>
+
+      <div class="user-wrapper">
+       <img src="https://www.kindpng.com/picc/m/725-7250968_mental-health-ribbon-png-transparent-png.png" width="40px" height="40px" alt="profile-img">
+       <div class="">
+          <h4>Aninda Syifa Rosita Uyun</h4>
+          <small>Data Analyst</small>
+       </div>
+      </div>
+    </header>
+
+    <main>
+
+        <div class="table-div" style="margin-top: 20px; background-color: #a8b4e8; padding: 15px; border-radius: 10px;overflow: scroll;">
+            <h5 style="margin-bottom: 15px; margin-top: 5px;">Tweet as realtime</h5>
+            <hr>
+            <br>
+            <h6>Get Data .csv =>  <a href="static/files/Data Preprocessing Twitter.csv"> DOWNLOAD</a></h6>
+            <table id="myTable" style="margin-top: 50px;">
+            <thead>
+                <tr>
+                  <th>Username</th>
+                  <th>Tweet</th>
+                  <th>Cleaning</th>
+                  <th>Case Folding</th>
+                  <th>Tokenizing</th>
+                  <th>Stop Removal</th>
+                  <th>Stemming</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in value %} 
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[3] }}</td>
+                    <td>{{ row[4] }}</td>
+                    <td>{{ row[5] }}</td>
+                    <td>{{ row[6] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>
+
+        <div style="margin-top: 20px; display: flex; justify-content: flex-end; font-size: 25px;">
+          <form method="POST">
+            <h6>Continue to be <input type="submit" name="labelling" value="Labelling" style="font-size: 25px; background-color: #c2d5e7; font-size: 17px; color: rgb(85 26 139); font-weight: bold; border-radius: 10px; border: 2px solid rgb(194 213 231);">
+            </h6>
+          </form>
+        </div>
+        
+    </main>
+  </div>
+</body>
+
+<script type="text/javascript" src="assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="assets/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.js"></script>
+<script>
+  $(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+</script>
+
+<script>
+  var subMenuCheck = document.querySelectorAll('.sidebar-menu input[type=checkbox]');
+  var navToggle = document.getElementById('nav-toggle')
+  var menuButton = document.querySelector('.sidebar-brand .fas')
+  menuButton.addEventListener('click', function(){
+    navToggle.checked = true;
+    subMenuCheck.forEach(sub => {
+      sub.checked = false;
+    })
+  })
+  var navToggle = document.getElementById('nav-toggle');
+  var subMenu = document.querySelectorAll('.sidebar-menu input[type=checkbox] + label');
+  subMenu.forEach(sub => {
+      sub.addEventListener('click', () => {
+        if (window.innerWidth < 768){
+          navToggle.checked = true; 
+        } else {
+          navToggle.checked = false; 
+        }
+        
+      })
+  })
+</script>
+</html>

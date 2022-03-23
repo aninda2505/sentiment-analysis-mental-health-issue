@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.css"/>
+
+    <title>Analyst</title>
+</head>
+<body>
+    
+  <input type="checkbox" id="nav-toggle">
+  <div class="sidebar">
+      <div class="sidebar-brand">
+        <h1> 
+          <span class="fab fa-asymmetrik fa-spin"> </span>
+          <span>Analyst</span>
+        </h1>
+        <span class="fas fa-bars"></span>
+      </div>
+      
+      <div class="sidebar-menu">
+        <ul>
+          <li>
+            <a href="{{ url_for('dashboard')}}">
+              <span class="fas fa-tachometer-alt"></span>
+              <span>Dashboard</span>
+            </a>
+          </li>
+
+          <li>
+            <input type="checkbox" name="" id="data">
+            <label for="data" >
+              <a role="button">
+                <span class="fas fa-paper-plane" ></span>
+                <span>Data Processing</span>
+              </a>
+            </label>
+            <ul>
+              <li><a href="{{ url_for('crawling')}}">Crawling Data</a></li>
+              <li><a href="{{ url_for('preprocessing_upload')}}">Pre-processing Data</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="{{ url_for('labelling_upload')}}">
+              <span class="fas fa-snowflake"></span>
+              <span>Labelling</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{url_for('classification_upload')}}" class="active">
+              <span class="fas fa-bezier-curve"></span>
+              <span>Classification</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="{{url_for('aboutme')}}">
+              <span class="fas fa-user-circle"></span>
+              <span>About me</span>
+            </a>
+          </li>
+        </ul>
+
+      </div>
+  </div>    
+
+  <div class="main-content">
+    <header>
+      <h2>
+        <label for="nav-toggle">
+          <span class="fas fa-bars"></span>
+        </label>
+        Visualisasi
+      </h2>
+
+      <div class="user-wrapper">
+       <img src="https://www.kindpng.com/picc/m/725-7250968_mental-health-ribbon-png-transparent-png.png" width="40px" height="40px" alt="profile-img">
+       <div class="">
+          <h4>Aninda Syifa Rosita Uyun</h4>
+          <small>Data Analyst</small>
+       </div>
+      </div>
+    </header>
+
+    <main>
+        <div class="recent-grid">
+            <div class="projects">
+              <div class="card">
+                <div class="card-header" style="display: flex; justify-content: space-between; background: white; padding: 1rem; border-radius: 12px; grid-template-columns: repeat(3, 1fr);">
+                  <div class="card-sentimen">
+                    <h3>POSITIVE</h3>
+                    <a href="#">{{ pos }}%</a>
+                  </div>
+                  <div class="card-sentimen">
+                    <h3>NEUTRAL</h3>
+                    <a href="#">{{ neu }}%</a>
+                  </div>
+                  <div class="card-sentimen">
+                    <h3>NEGATIVE</h3>
+                    <a href="#">{{ neg }}%</a>
+                  </div>
+                </div>
+              </div>
+    
+              <div class="" style="margin-top: 20px;">
+                <div class="card-grafik" style="justify-content: space-between; background: #a8b4e8; padding: 1rem; border-radius: 12px; grid-template-columns: repeat(1, 1fr);">
+                  <h3>VISUALISASI GRAFIK SENTIMENT ANALYST</h3>
+                  <hr>
+                  <br>
+                  <img src="static/files/grafik.png"  style="width: 700px; height: 500px;">
+                </div>
+              </div>
+    
+              <style>
+                .card-chart {
+                  overflow: hidden;
+                }
+                .card-chart h3, .card-chart hr {
+                  position: relative;
+                  z-index: 2;
+                }
+                .card-chart img {
+                  object-fit: cover;
+                  width: 100%;
+                  height: auto;
+                  margin-top: 20px;
+                  transform: scale(1.3);
+                }
+              </style>
+              <div class="cards" >
+                <div class="card-chart" style="background-color: #a8b4e8;">
+                  <div>
+                    <h3>Pie Chart</h3>
+                    <hr>
+
+                    <!-- <img src="static/files/pie-chart.png"  style="object-fit: cover; height: 100%"> -->
+                    <img src="static/files/pie-chart.png">
+                    <br>
+                  </div>
+                </div>
+                <div class="card-chart" style="background-color: #a8b4e8;">
+                  <div>
+                    <h3>Word Cloud</h3>
+                    <hr>
+                    <!-- <img src="static/files/wordcloud.png"  style="object-fit: cover; height: 500px;"> -->
+                    <img src="static/files/wordcloud.png">
+                    <br>
+                  </div>
+                </div>
+              </div>
+    
+          </div>  
+    </main>
+  </div>
+</body>
+
+<script type="text/javascript" src="assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="assets/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.js"></script>
+<script>
+  $(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+</script>
+
+<script>
+  var subMenuCheck = document.querySelectorAll('.sidebar-menu input[type=checkbox]');
+  var navToggle = document.getElementById('nav-toggle')
+  var menuButton = document.querySelector('.sidebar-brand .fas')
+  menuButton.addEventListener('click', function(){
+    navToggle.checked = true;
+    subMenuCheck.forEach(sub => {
+      sub.checked = false;
+    })
+  })
+  var navToggle = document.getElementById('nav-toggle');
+  var subMenu = document.querySelectorAll('.sidebar-menu input[type=checkbox] + label');
+  subMenu.forEach(sub => {
+      sub.addEventListener('click', () => {
+        if (window.innerWidth < 768){
+          navToggle.checked = true; 
+        } else {
+          navToggle.checked = false; 
+        }
+        
+      })
+  })
+</script>
+</html>
